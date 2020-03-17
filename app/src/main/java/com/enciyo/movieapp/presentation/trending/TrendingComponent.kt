@@ -11,20 +11,23 @@ object TrendingComponent {
 
     fun inject() = mAdapterModule
 
-    private val mAdapterModule by lazy {
-        loadKoinModules(module {
-            single { provideTrendingBindingComponents() }
-            factory { provideTrendingNavigator(navigator = get()) }
-            factory { provideTrendingAdapter() }
-            viewModel { provideTrendingViewModel(trendingUseCase = get(), trendingNavigator = get()) }
 
-        })
+    private val mAdapterModule by lazy {
+        loadKoinModules(modules)
     }
 
+    private val modules = module {
+        single { provideTrendingBindingComponents() }
+        factory { provideTrendingNavigator(navigator = get()) }
+        factory { provideTrendingAdapter() }
+        viewModel { provideTrendingViewModel(trendingUseCase = get(), trendingNavigator = get()) }
+    }
 
-    private fun provideTrendingBindingComponents() = TrendingBindingComponentImp() as TrendingBindingComponent
+    private fun provideTrendingBindingComponents() =
+        TrendingBindingComponentImp() as TrendingBindingComponent
 
-    private fun provideTrendingNavigator(navigator: Navigator) = navigator.provideTrendingNavigator()
+    private fun provideTrendingNavigator(navigator: Navigator) =
+        navigator.provideTrendingNavigator()
 
     private fun provideTrendingAdapter() = TrendingAdapter()
 

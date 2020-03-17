@@ -1,6 +1,7 @@
 package com.enciyo.movieapp.presentation.trending
 
-import android.util.Log
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.enciyo.movieapp.R
 import com.enciyo.movieapp.common.base.BaseAdapter
 import com.enciyo.movieapp.data.model.TrendingEntitiy
@@ -13,15 +14,18 @@ class TrendingAdapter : BaseAdapter<TrendingEntitiy, ItemTrendingBinding>(
     { t1, t2 -> t1==t2 }
 ) {
 
-    var listener: ((TrendingEntitiy) -> Unit)? = null
+    var listener: ((TrendingEntitiy,FragmentNavigator.Extras) -> Unit)? = null
 
 
     override fun onViewHolder(mView: ItemTrendingBinding, item: TrendingEntitiy?) {
         mView.model = item
         mView.executePendingBindings()
         mView.root.setOnClickListener {
+            val extras = FragmentNavigatorExtras(
+                mView.appCompatImageViewBackdropPath to item?.backdropPathSafe.toString()
+            )
             item?.let {
-                listener?.invoke(it)
+                listener?.invoke(it,extras)
             }
         }
     }

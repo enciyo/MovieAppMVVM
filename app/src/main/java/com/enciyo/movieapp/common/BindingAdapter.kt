@@ -17,9 +17,11 @@ fun AppCompatImageView.loadImage(url: String?) {
     val circularProgressDrawable = CircularProgressDrawable(context)
     circularProgressDrawable.start()
     Glide.with(this)
-        .load("https://image.tmdb.org/t/p/original$url")
+        .load(url)
+        .skipMemoryCache(true)
         .transition(DrawableTransitionOptions.withCrossFade())
         .fitCenter()
         .placeholder(circularProgressDrawable)
         .into(this)
 }
+

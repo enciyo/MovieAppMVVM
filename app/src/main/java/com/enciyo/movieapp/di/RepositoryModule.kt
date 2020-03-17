@@ -11,10 +11,7 @@ object RepositoryModule {
 
     fun newInstance() = module {
         single {
-            provideTrendingRepository(
-                trendingLocalDataSource = get(),
-                trendingRemoteDataSource = get()
-            )
+            provideTrendingRepository(trendingLocalDataSource = get(), trendingRemoteDataSource = get())
         }
     }
 

@@ -19,10 +19,16 @@ class MainActivity : AppCompatActivity() {
     private val mTrendingUseCase: TrendingUseCase by inject()
 
 
+    private val mloadingKoinModule by lazy {
+        findNavController(R.id.nav_host_graph).also(::loadNavigatorModule)
+    }
+    private fun injectNavigator() = mloadingKoinModule
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        findNavController(R.id.nav_host_graph).also(::loadNavigatorModule)
+
+        injectNavigator()
 
 
         mTrendingUseCase

@@ -2,14 +2,13 @@ package com.enciyo.movieapp.presentation.trending
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.fragment.FragmentNavigator
 import com.enciyo.movieapp.common.base.BaseViewModel
 import com.enciyo.movieapp.common.resource.Resource
 import com.enciyo.movieapp.data.model.TrendingEntitiy
 import com.enciyo.movieapp.domain.TrendingUseCase
-import com.hadilq.liveevent.LiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 class TrendingFragmentViewModel(
     private val mTrendingUseCase: TrendingUseCase,
@@ -49,8 +48,12 @@ class TrendingFragmentViewModel(
     }
 
 
-    fun onItemClicked(item: TrendingEntitiy) {
-        mTrendingNavigator.showDetail(item)
+    fun onItemClicked(item: TrendingEntitiy, extas: FragmentNavigator.Extras) {
+        mTrendingNavigator.showDetail(item,extas)
+    }
+
+    fun onSearchClicked(){
+        mTrendingNavigator.showSearch()
     }
 
 }

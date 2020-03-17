@@ -13,8 +13,8 @@ class TrendingBindingComponentImp : TrendingBindingComponent {
     override fun RecyclerView.loadAdapter(trendingAdapter: TrendingAdapter, viewModel: TrendingFragmentViewModel) {
         TransitionManager.beginDelayedTransition(this)
         this.setupGrid(trendingAdapter)
-        trendingAdapter.listener = {
-            viewModel.onItemClicked(it)
+        trendingAdapter.listener = { item,extas->
+            viewModel.onItemClicked(item,extas)
         }
     }
 

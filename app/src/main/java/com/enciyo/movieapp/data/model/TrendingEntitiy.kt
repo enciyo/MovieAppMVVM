@@ -22,7 +22,7 @@ data class TrendingEntitiy(
     val mVoteAverage: Double? = null, // 7.3
     val mVoteCount: Int? = null, // 4609
     val mTimeWindow: String? = null
-) : Serializable{
+) : Serializable {
     val safeName
         get() = when {
             mOriginalTitle!=null -> mOriginalTitle
@@ -31,6 +31,8 @@ data class TrendingEntitiy(
             mTitle!=null -> mTitle
             else -> ""
         }
+    val backdropPathSafe
+        get() = "https://image.tmdb.org/t/p/original$mBackdropPath"
 
 
 }
